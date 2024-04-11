@@ -104,7 +104,7 @@ func (m *Model) SetContent(s string) {
 	m.lines = strings.Split(s, "\n")
 
 	for idx, l := range m.lines {
-		if len(l) > m.Width {
+		if len(l) >= m.Width {
 			m.lines = append(m.lines[:idx], append(make([]string, 1), m.lines[idx:]...)...)
 		}
 	}
