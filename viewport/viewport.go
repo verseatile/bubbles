@@ -103,6 +103,12 @@ func (m *Model) SetContent(s string) {
 	s = strings.ReplaceAll(s, "\r\n", "\n") // normalize line endings
 	m.lines = strings.Split(s, "\n")
 
+	for idx, l := range m.lines {
+		if len(l) > m.Width {
+			m.lines = append(m.lines[:idx], append(make([]string, 1), m.lines[idx:]...)...)
+		}
+	}
+
 	if m.YOffset > len(m.lines)-1 {
 		m.GotoBottom()
 	}
